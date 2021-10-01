@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+android:paddingTop="20dp"
+    tools:context=".ordertype">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="10dp"
+        android:background="@drawable/ic_card"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="250dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_margin="20dp"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/productimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/shirt" />
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="161dp"
+                android:layout_height="match_parent">
+
+
+                <TextView
+
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/gothambold"
+                    android:textSize="20dp"
+                    android:id="@+id/producttitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blus shirt" />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/gothambold"
+                    android:textSize="20dp"
+                    android:id="@+id/productprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="350₹" />
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/gothambold"
+                        android:textSize="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="size" />
+                    <TextView
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/gothambold"
+                        android:textSize="20dp"
+                        android:id="@+id/psize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="S" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/gothambold"
+                    android:textSize="10dp"
+                    android:id="@+id/productdesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@drawable/ic_card"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:background="#3C415C"
+            android:id="@+id/gotowalktry"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginStart="35dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_white_go_and_try"/>
+<LinearLayout
+    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Try now"
+        android:fontFamily="@font/gothambold"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+    android:layout_marginStart="40dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Visit store and try"
+        android:fontFamily="@font/gothambold"
+        android:layout_marginTop="2dp"
+        android:textSize="15dp"
+        android:textColor="#858F9B"
+        android:layout_marginStart="40dp"/>
+
+
+</LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@drawable/ic_card"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:id="@+id/gotohometry"
+            android:background="#3C415C"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginStart="35dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_iwhite_home"/>
+            <LinearLayout
+
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Try at home"
+                    android:fontFamily="@font/gothambold"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="40dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home tryal"
+                    android:fontFamily="@font/gothambold"
+                    android:layout_marginTop="2dp"
+                    android:textSize="15dp"
+                    android:textColor="#858F9B"
+                    android:layout_marginStart="40dp"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+</LinearLayout>

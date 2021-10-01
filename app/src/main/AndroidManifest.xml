@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.whalemart_og">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Whalemart_og">
+        <activity android:name=".showclothes"></activity>
+        <activity android:name=".showshoes" />
+        <activity android:name=".showelectronics" />
+        <activity android:name=".history_of_user" />
+        <activity android:name=".shopMainActivity" />
+        <activity android:name=".showHomeTryProduct" />
+        <activity android:name=".homeTry" />
+        <activity android:name=".showwalkTryProduct" />
+        <activity android:name=".openMap" />
+        <activity android:name=".walkTry" />
+        <activity android:name=".add_product" />
+        <activity android:name=".product" />
+        <activity android:name=".ordertype" />
+        <activity android:name=".sendnoti" />
+        <activity android:name=".login" />
+        <activity android:name=".createacount" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.splashscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".FirebaseMessagingService"
+            android:exported="false"
+            tools:ignore="MissingClass">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

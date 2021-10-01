@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "136173059358",
+    "project_id": "whalemart-og",
+    "storage_bucket": "whalemart-og.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136173059358:android:6ba67b5856b45e4dcd9d0f",
+        "android_client_info": {
+          "package_name": "com.example.whalemart_og"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136173059358-urk3juv82vcqhm2aqcdqt45ifh1v2f7c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvoNgom2PuQU53wrxy8ka0qRTPRVFd83E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136173059358-urk3juv82vcqhm2aqcdqt45ifh1v2f7c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
