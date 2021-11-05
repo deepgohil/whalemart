@@ -25,10 +25,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
@@ -47,11 +51,13 @@ public class add_product extends AppCompatActivity {
     EditText titleelectronice,descriptionelectronics,actualpriceelectronic,realpriceelectronic,quantity;
     TextInputLayout title3,description3,actualprice3,realprice3,quantity1;
     SwitchCompat switchelectronics;
+    
+    String common_title,common_price;
 
     String flag="";
 
 
-
+String shopaddress,shopname;
 ImageView img1,img2,img3;
 Button clothsbtn,shoebtn,elcebtn;
 Uri uri1,uri2,uri3;
@@ -60,6 +66,31 @@ ProgressBar progressBar2;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
+
+        //get shop name and address
+        FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        shopname = dataSnapshot.child("shopname").getValue(String.class);
+                        shopaddress = dataSnapshot.child("shopaddress").getValue(String.class);
+
+
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                        Toast.makeText(add_product.this, "ERROR ", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     img1=findViewById(R.id.img1);
     img2=findViewById(R.id.img2);
     img3=findViewById(R.id.img3);
@@ -482,7 +513,16 @@ clothsbtn.setOnClickListener(new View.OnClickListener() {
                 else if(uri3 == null){
                     Toast.makeText(add_product.this, "Select Image", Toast.LENGTH_SHORT).show();
                 }
+                else if(shopaddress.isEmpty()){
+                    Toast.makeText(add_product.this, "wait for two seconds", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(shopname.isEmpty()){
+                    Toast.makeText(add_product.this, "wait for two seconds", Toast.LENGTH_SHORT).show();
+                }
                 else {
+                    common_price=realprice.getText().toString();
+                    common_title=title.getText().toString();
                     upload1();
                     flag="cloths";
                 }
@@ -549,7 +589,17 @@ clothsbtn.setOnClickListener(new View.OnClickListener() {
                 else if(uri3 == null){
                     Toast.makeText(add_product.this, "Select Image", Toast.LENGTH_SHORT).show();
                 }
+                else if(shopaddress.isEmpty()){
+                    Toast.makeText(add_product.this, "wait for two seconds", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(shopname.isEmpty()){
+                    Toast.makeText(add_product.this, "wait for two seconds", Toast.LENGTH_SHORT).show();
+                }
                 else {
+
+                    common_price=off.getText().toString();
+                    common_title=titleshoes.getText().toString();
                     upload1();
                     flag="shoes";
                 }
@@ -591,7 +641,17 @@ clothsbtn.setOnClickListener(new View.OnClickListener() {
                 else if(uri3 == null){
                     Toast.makeText(add_product.this, "Select Image", Toast.LENGTH_SHORT).show();
                 }
+                else if(shopaddress.isEmpty()){
+                    Toast.makeText(add_product.this, "wait for two seconds", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(shopname.isEmpty()){
+                    Toast.makeText(add_product.this, "wait for two seconds", Toast.LENGTH_SHORT).show();
+                }
                 else {
+
+                    common_price=realpriceelectronic.getText().toString();
+                    common_title=titleelectronice.getText().toString();
                     upload1();
                     flag="elec";
                 }
@@ -730,6 +790,14 @@ if(flag=="cloths") {
     map.put("l_size", l_size.getText().toString());
     map.put("xl_size", xl_size.getText().toString());
     map.put("shop id", FirebaseAuth.getInstance().getUid());
+    map.put("shopname", shopname);
+    map.put("shopaddress", shopaddress);
+
+
+//    shopname = dataSnapshot.child("shopname").getValue(String.class);
+//    address = dataSnapshot.child("address").getValue(String.class);
+//
+
 
 
     FirebaseDatabase.getInstance().getReference()
@@ -777,6 +845,8 @@ else if(flag=="shoes")
     map.put("uk 11", suk11.getText().toString().trim());
     map.put("uk 12", suk12.getText().toString().trim());
     map.put("shop id", FirebaseAuth.getInstance().getUid());
+    map.put("shopname", shopname);
+    map.put("shopaddress", shopaddress);
 
 
     FirebaseDatabase.getInstance().getReference()
@@ -820,8 +890,9 @@ else if(flag=="elec")
     map.put("actualprice", actualpriceelectronic.getText().toString().trim());
     map.put("realprice", realpriceelectronic.getText().toString().trim());
     map.put("quantity", quantity.getText().toString().trim());
-
     map.put("shop id", FirebaseAuth.getInstance().getUid());
+    map.put("shopname", shopname);
+    map.put("shopaddress", shopaddress);
 
 
     FirebaseDatabase.getInstance().getReference()
@@ -867,10 +938,7 @@ else {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        progressBar2.setVisibility(View.GONE);
-                        Toast.makeText(add_product.this, "Data inserted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(add_product.this, MainActivity.class));
-                        finish();
+                        selfupload(ts);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -901,10 +969,11 @@ else {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        progressBar2.setVisibility(View.GONE);
-                        Toast.makeText(add_product.this, "Data inserted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(add_product.this, MainActivity.class));
-                        finish();
+//                        progressBar2.setVisibility(View.GONE);
+//                        Toast.makeText(add_product.this, "Data inserted", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(add_product.this, MainActivity.class));
+//                        finish();
+                        selfupload(ts);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -915,6 +984,41 @@ else {
                     }
                 });
 
+
+
+    }
+
+    private void selfupload(String ts) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("img1", uri1.toString());///
+        map.put("catagory", flag);////
+        map.put("IDfordeleteproduct", ts);////
+        map.put("Title", common_title);///
+        map.put("realprice",common_price);///
+
+        FirebaseDatabase.getInstance().getReference()
+                .child("User")
+             .child(FirebaseAuth.getInstance().getUid())
+                .child("userproducts")
+                .child(ts)
+                .setValue(map)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        progressBar2.setVisibility(View.GONE);
+                        Toast.makeText(add_product.this, "Data inserted", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(add_product.this, MainActivity.class));
+                        finish();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressBar2.setVisibility(View.GONE);
+                        Toast.makeText(add_product.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
     }
@@ -935,10 +1039,7 @@ else {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        progressBar2.setVisibility(View.GONE);
-                        Toast.makeText(add_product.this, "Data inserted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(add_product.this, MainActivity.class));
-                        finish();
+                        selfupload(ts);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

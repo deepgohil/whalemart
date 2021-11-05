@@ -6,10 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.paging.PagedList;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +20,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.example.whalemart_og.activity.MainActivity;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.HashMap;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 
@@ -33,10 +46,13 @@ public class home extends Fragment {
     String type;
     RecyclerView recycle;
     ProgressBar recycleprogress;
-    String mail;
+    String mail,check,UID;
     LinearLayout datatohide;
     ImageView walktry,homeTry,history;
+    String token;
 //
+private DatabaseReference mDatabase;
+
     View view;
 
 
@@ -45,10 +61,33 @@ public class home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        view=inflater.inflate(R.layout.fragment_home, container, false);
-
+        UID=FirebaseAuth.getInstance().getUid();
 
 //        loadallproducts();
 //       profile_image=view.findViewById(R.id.userimage);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+
+
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@androidx.annotation.NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                      token = task.getResult();
+
+
+                        Toast.makeText(getContext(), token, Toast.LENGTH_SHORT).show();
+                        Log.d("token", token);
+                    }
+                });
+
 
         datatosearch=view.findViewById(R.id.datatosearch);
         recycle=view.findViewById(R.id.recycle);
@@ -118,16 +157,43 @@ public class home extends Fragment {
 //
 //            }
 //        });
+///update token
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+            }
+        },2000);
+
 
 
 //////////////////////////recycle
                 recycle=view.findViewById(R.id.recycle);
-        recycle.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        LinearLayoutManager layoutManager=new LinearLayoutManager(view.getContext());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
 
+        recycle.setLayoutManager(layoutManager);
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPrefetchDistance(5)
+                .setPageSize(10)
+                .build();
+        
+        /////////new
+
+        ////////new ends
+
+
+        ///////////////old code
+//
         FirebaseRecyclerOptions<ModelProduct> options =
                 new FirebaseRecyclerOptions.Builder<ModelProduct>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("product"), ModelProduct.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("product").limitToLast(10), ModelProduct.class)
                         .build();
+
 
         adapterSeller=new AdapterSeller(options);
         recycle.setAdapter(adapterSeller);

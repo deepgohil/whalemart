@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -20,7 +19,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Whalemart_og">
-        <activity android:name=".showclothes"></activity>
+        <activity android:name=".callcheck"></activity>
+        <activity android:name=".Videocall_outgoing" />
+        <activity android:name=".Videocall_incoming" />
+        <activity android:name=".showorderDetails" />
+        <activity android:name=".owner_can_edit_data_here" />
+        <activity android:name=".showclothes" />
         <activity android:name=".showshoes" />
         <activity android:name=".showelectronics" />
         <activity android:name=".history_of_user" />

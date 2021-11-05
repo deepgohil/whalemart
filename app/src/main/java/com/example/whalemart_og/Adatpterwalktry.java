@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,8 +15,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.whalemart_og.activity.MainActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.security.acl.AclNotFoundException;
@@ -54,6 +58,24 @@ holder.openmap.setOnClickListener(new View.OnClickListener() {
 
     }
 });
+        holder.cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(holder.orderId.getContext(),MainActivity.class);
+                String id=getRef(position).getKey();
+                FirebaseDatabase.getInstance().getReference().child("User")
+                        .child(FirebaseAuth.getInstance().getUid())
+                        .child("walkTry")
+                        .child(id)
+                        .removeValue();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                holder.orderId.getContext().startActivity(intent);
+
+                ((Activity)holder.orderId.getContext()).finish();
+
+
+            }
+        });
 holder.openmap.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -89,6 +111,7 @@ holder.openmap.setOnClickListener(new View.OnClickListener() {
     class HolderProductSeller extends RecyclerView.ViewHolder
     {
         private ImageView imgproduct;
+        private Button cancel;
         private LinearLayout getdiretion;
         private TextView shopname,adddress,openmap,orederTime,orderId;
       
@@ -97,6 +120,7 @@ holder.openmap.setOnClickListener(new View.OnClickListener() {
             super(itemView);
             imgproduct=itemView.findViewById(R.id.imgproduct);
             getdiretion=itemView.findViewById(R.id.getdiretion);
+            cancel=itemView.findViewById(R.id.cancel);
             shopname=itemView.findViewById(R.id.shopname);
             adddress=itemView.findViewById(R.id.adddress);
             openmap=itemView.findViewById(R.id.openmap);

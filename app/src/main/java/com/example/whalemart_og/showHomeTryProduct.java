@@ -28,7 +28,10 @@ public class showHomeTryProduct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_home_try_product);
         loadproduct=findViewById(R.id.loadproduct);
-        loadproduct.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(showHomeTryProduct.this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        loadproduct.setLayoutManager(layoutManager);
 
 
         erroimage=findViewById(R.id.erroimage);

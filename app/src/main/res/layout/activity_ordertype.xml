@@ -207,6 +207,56 @@ android:paddingTop="20dp"
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@drawable/ic_card"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:id="@+id/videocall"
+            android:background="#3C415C"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginStart="35dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/video_call_now"/>
+            <LinearLayout
+
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Call now"
+                    android:fontFamily="@font/gothambold"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="40dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Call and view the product"
+                    android:fontFamily="@font/gothambold"
+                    android:layout_marginTop="2dp"
+                    android:textSize="15dp"
+                    android:textColor="#858F9B"
+                    android:layout_marginStart="40dp"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
 
 

@@ -40,7 +40,7 @@ List<Data> data;
 String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com/o/product%2F1630481597739.png?alt=media&token=10d8827f-82be-4441-8019-598f4ff84965";
     String id;
     TextView productname,showprice,details,catagory,sizetv;
-    String url2,url3,catagory1;
+    String url2,url3,catagory1,shopid;
     ImageView sizechart;
     Button trynowbtn,buyNow;
     TextInputLayout tohide;
@@ -112,6 +112,7 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
         id=getIntent().getStringExtra("id");
         price=getIntent().getStringExtra("price");
         url=getIntent().getStringExtra("url1");
+        catagoryname=getIntent().getStringExtra("catogary");
 
 
 
@@ -127,6 +128,7 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                        url2 = dataSnapshot.child("img2").getValue(String.class);
                        url3 = dataSnapshot.child("img3").getValue(String.class);
                        catagory1 = dataSnapshot.child("catagory").getValue(String.class);
+                       shopid = dataSnapshot.child("shop id").getValue(String.class);
                         if (catagory1.toString().equals("cloths"))
                         {
 
@@ -199,7 +201,7 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
         trynowbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                Toast.makeText(product.this, catagoryname, Toast.LENGTH_SHORT).show();
                 mysize=size.getText().toString();
 //                catagory.setText(mysize);
                 if(catagory1.toString().equals("shoes"))
@@ -265,6 +267,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                             startmain.putExtra("url1",url);
                             startmain.putExtra("desc",description);
                             startmain.putExtra("productcount",Eq);
+                            startmain.putExtra("catogary",catagoryname);
+                            startmain.putExtra("shopid",shopid);
                             startActivity(startmain);
                         }
                     })
@@ -322,6 +326,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("size","XS");
                                     startmain.putExtra("desc",description);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("catogary",catagoryname);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })
@@ -366,6 +372,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                 startmain.putExtra("size","S");
                                 startmain.putExtra("desc",description);
                                 startmain.putExtra("productcount",xs);
+                                startmain.putExtra("catogary",catagoryname);
+                                startmain.putExtra("shopid",shopid);
                                 startActivity(startmain);
                             }
                         })
@@ -410,6 +418,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("size","M");
                                     startmain.putExtra("desc",description);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("catogary",catagoryname);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })
@@ -454,6 +464,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("size","L");
                                     startmain.putExtra("desc",description);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("catogary",catagoryname);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })
@@ -500,6 +512,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("size","XL");
                                     startmain.putExtra("desc",description);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("catogary",catagoryname);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })
@@ -566,6 +580,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("size","UK 7");
                                     startmain.putExtra("desc",description);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("catogary",catagoryname);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })
@@ -612,6 +628,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("size","UK 8");
                                     startmain.putExtra("desc",description);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("catogary",catagoryname);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })
@@ -657,6 +675,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("size","UK 9");
                                     startmain.putExtra("desc",description);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("catogary",catagoryname);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })
@@ -701,6 +721,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("size","UK 10");
                                     startmain.putExtra("desc",description);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("catogary",catagoryname);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })
@@ -746,6 +768,8 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("size","UK 11");
                                     startmain.putExtra("desc",description);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("catogary",catagoryname);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })
@@ -790,7 +814,9 @@ String url="https://firebasestorage.googleapis.com/v0/b/whalemart-og.appspot.com
                                     startmain.putExtra("url1",url);
                                     startmain.putExtra("size","UK 12");
                                     startmain.putExtra("desc",description);
+                                    startmain.putExtra("catogary",catagoryname);
                                     startmain.putExtra("productcount",xs);
+                                    startmain.putExtra("shopid",shopid);
                                     startActivity(startmain);
                                 }
                             })

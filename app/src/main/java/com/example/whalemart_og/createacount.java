@@ -181,6 +181,7 @@ public class createacount extends AppCompatActivity {
                         map.put("image",uri.toString());
                         map.put("type","customer");
                         map.put("token",token);
+                        map.put("call","false");
 
                         FirebaseDatabase.getInstance().getReference()
                                 .child("User")

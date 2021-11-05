@@ -56,7 +56,11 @@ TextView datamsg;
 
 
         loadproduct=findViewById(R.id.loadproduct);
-        loadproduct.setLayoutManager(new LinearLayoutManager(this));
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(showwalkTryProduct.this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        loadproduct.setLayoutManager(layoutManager);
         FirebaseRecyclerOptions<Modelwalktry> options =
                 new FirebaseRecyclerOptions.Builder<Modelwalktry>()
                      .setQuery(FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getUid()).child("walkTry"), Modelwalktry.class)

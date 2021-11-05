@@ -48,7 +48,10 @@ public class history_of_user extends AppCompatActivity {
                 });
 
         loadproduct=findViewById(R.id.loadproduct);
-        loadproduct.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(history_of_user.this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        loadproduct.setLayoutManager(layoutManager);
         FirebaseRecyclerOptions<Modelhistory> options =
                 new FirebaseRecyclerOptions.Builder<Modelhistory>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getUid()).child("history"), Modelhistory.class)

@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.whalemart_og"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -23,6 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+//    buildFeatures{
+//        dataBinding = true // for data binding
+//        viewBinding = true // for view binding
+//    }
     viewBinding{
         enabled=true
     }
@@ -66,4 +70,17 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    ////////////////////paging
+    implementation 'android.arch.paging:runtime:3.0.1'
+    //Firebase Pagination Library
+    implementation 'com.shreyaspatil:FirebaseRecyclerPagination:1.0.1'
+//
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//////////////message
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+//
+    //jitsi
+    implementation ('org.jitsi.react:jitsi-meet-sdk:2.+') { transitive = true }
 }

@@ -8,22 +8,36 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.whalemart_og.R;
+import com.example.whalemart_og.Videocall_incoming;
 import com.example.whalemart_og.home;
 import com.example.whalemart_og.fragment.notification;
 import com.example.whalemart_og.search;
 import com.example.whalemart_og.you;
 import com.example.whalemart_og.login;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    private LocationManager locationManager;
+
     BottomNavigationView bnv;
+    String check,UID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +49,37 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
+
+                        check = dataSnapshot.child("call").getValue(String.class);
+                        UID = dataSnapshot.child("incominguid").getValue(String.class);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@androidx.annotation.NonNull DatabaseError error) {
+
+                    }
+                });
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(check.equals("true"))
+                {
+                    Intent intent = new Intent(MainActivity.this, Videocall_incoming.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("UID",UID);
+                    startActivity(intent);
+
+                }
+            }
+        },5000);
+
 
 //        locationManager= (LocationManager) getSystemService(LOCATION_SERVICE)
 
@@ -74,11 +119,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+//        Handler handler=new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        },2000);
+
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(MainActivity.this, MainActivity.class));
-        finish();
-    }
+
 }

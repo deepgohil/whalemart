@@ -191,7 +191,7 @@ app:startIconDrawable="@drawable/ic__downaero"
 <LinearLayout
     android:paddingRight="10dp"
     android:gravity="center_horizontal"
-    android:background="#3C415C"
+    android:background="#E5E5E5"
     android:layout_alignParentBottom="true"
     android:layout_width="match_parent"
     android:layout_height="55dp"
