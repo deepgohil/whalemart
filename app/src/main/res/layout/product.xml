@@ -33,7 +33,7 @@
 
 
                 <TextView
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="25dp"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:fontFamily="@font/gothambold"
@@ -42,17 +42,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Blus shirt" />
-
+<LinearLayout
+    android:layout_marginTop="5dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
                 <TextView
-                    android:layout_marginTop="10dp"
+
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:fontFamily="@font/gothambold"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="350₹" />
+    <TextView
+
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:fontFamily="@font/gothambold"
+        android:textSize="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="₹" />
+</LinearLayout>
                 <LinearLayout
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"

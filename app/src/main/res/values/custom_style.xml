@@ -4,4 +4,7 @@
     <item name="cornerSize">10%</item>
 </style>
 
+    <style name="WhiteCursorSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="colorControlActivated">#B2B1B9</item>
+    </style>
 </resources>

@@ -117,7 +117,12 @@
 
 
     <SearchView
-        android:background="#D3D3D3"
+        android:theme="@style/WhiteCursorSearchView"
+     android:iconifiedByDefault="false"
+        android:queryBackground="@color/transparent"
+        android:queryHint="Search product here"
+        android:padding="20dp"
+        android:background="@drawable/search_background"
         android:id="@+id/datatosearch"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"

@@ -1,13 +1,22 @@
 package com.example.whalemart_og;
 
 public class Modelhometry {
-    String productId,title,sAddress,time,orderId,imageurl,size,price,desc;
+    String productId;
+    String title;
+    String sAddress;
+    String time;
+    String orderId;
+    String imageurl;
+    String size;
+    String price;
+    String desc;
+    String shopid;
     public Modelhometry()
     {
 
     }
 
-    public Modelhometry(String productId, String title, String sAddress, String time, String orderId, String imageurl, String size, String price, String desc) {
+    public Modelhometry(String productId, String title, String sAddress, String time, String orderId, String imageurl, String size, String price, String desc, String shopid) {
         this.productId = productId;
         this.title = title;
         this.sAddress = sAddress;
@@ -17,6 +26,14 @@ public class Modelhometry {
         this.size = size;
         this.price = price;
         this.desc = desc;
+        this.shopid = shopid;
+    }
+    public String getShopid() {
+        return shopid;
+    }
+
+    public void setShopid(String shopid) {
+        this.shopid = shopid;
     }
 
     public String getProductId() {

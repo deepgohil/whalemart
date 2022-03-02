@@ -19,7 +19,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Whalemart_og">
-        <activity android:name=".callcheck"></activity>
+        <activity android:name=".more_details"></activity>
+        <activity android:name=".hometry_order_details_show_self" />
+        <activity android:name=".walktry_order_details_show_self" />
+        <activity android:name=".callcheck" />
         <activity android:name=".Videocall_outgoing" />
         <activity android:name=".Videocall_incoming" />
         <activity android:name=".showorderDetails" />

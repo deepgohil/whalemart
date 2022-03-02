@@ -36,41 +36,48 @@ public class Adatpterwalktry extends FirebaseRecyclerAdapter<Modelwalktry, Adatp
 //        private TextView shopname,adddress,openmap,orederTime,orderId;
         holder.orderId.setText(model.getID());
         holder.shopname.setText(model.getShopname());
-        holder.adddress.setText(model.getAddress());
+        holder.adddress.setText(model.getdAddress());
         holder.orederTime.setText(model.getTime());
+        holder.Saddress=model.getsAddress();
+        holder.Daddress=model.getdAddress();
+//        holder.orederTime.setText(model.getTime());
+        holder.shpoid=model.getShopid();
+
         Picasso.get().load(model.getImageurl()).into(holder.imgproduct);
 //        Picasso.get().load(Uri.parse(list.get(position).getImgeurl())).into(holder.roundedImageView);
-holder.openmap.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent(holder.orderId.getContext(),openMap.class);
-        String id=getRef(position).getKey();
-        intent.putExtra("orderid",model.getID());
-        intent.putExtra("id",id);
-        intent.putExtra("shopname",model.getShopname());
-        intent.putExtra("addrss",model.getAddress());
-        intent.putExtra("ordertime",model.getTime());
-
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        holder.orderId.getContext().startActivity(intent);
-
-        ((Activity)holder.orderId.getContext()).finish();
-
-    }
-});
+//holder.openmap.setOnClickListener(new View.OnClickListener() {
+//    @Override
+//    public void onClick(View v) {
+//        Intent intent=new Intent(holder.orderId.getContext(),openMap.class);
+//        String id=getRef(position).getKey();
+//        intent.putExtra("orderid",model.getID());
+//        intent.putExtra("id",id);
+//        intent.putExtra("shopname",model.getShopname());
+//        intent.putExtra("addrss",model.getAddress());
+//        intent.putExtra("ordertime",model.getTime());
+//
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        holder.orderId.getContext().startActivity(intent);
+//
+//        ((Activity)holder.orderId.getContext()).finish();
+//
+//    }
+//});
         holder.cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(holder.orderId.getContext(),MainActivity.class);
+
                 String id=getRef(position).getKey();
                 FirebaseDatabase.getInstance().getReference().child("User")
                         .child(FirebaseAuth.getInstance().getUid())
                         .child("walkTry")
                         .child(id)
                         .removeValue();
+
+
+                Intent intent=new Intent(holder.orderId.getContext(),MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 holder.orderId.getContext().startActivity(intent);
-
                 ((Activity)holder.orderId.getContext()).finish();
 
 
@@ -80,7 +87,7 @@ holder.openmap.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
       try {
-          Uri uri=Uri.parse("https://www.google.co.in/maps/dir/" +"Kandivali West, Mumbai, Maharashtra 400067" +"/" +"Shop No 6, Ashish Apt, Tirupati Lane, Navghar Rd, opposite Shree Ram Jewellers, Bhayandar East, Maharashtra 401105");
+          Uri uri=Uri.parse("https://www.google.co.in/maps/dir/" +holder.Saddress +"/" +holder.Daddress);
           Intent intent=new Intent(Intent.ACTION_VIEW,uri);
           intent.setPackage("com.google.android.apps.maps");
           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -89,13 +96,31 @@ holder.openmap.setOnClickListener(new View.OnClickListener() {
       }
       catch (ActivityNotFoundException e)
       {
-          Uri uri=Uri.parse("https://www.google.co.in/maps/dir/" +"Kandivali West, Mumbai, Maharashtra 400067" +"/" +"Shop No 6, Ashish Apt, Tirupati Lane, Navghar Rd, opposite Shree Ram Jewellers, Bhayandar East, Maharashtra 401105");
+          Uri uri=Uri.parse("https://www.google.co.in/maps/dir/" +holder.Saddress +"/" +holder.Daddress);
           Intent intent=new Intent(Intent.ACTION_VIEW,uri);
           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
           holder.orderId.getContext().startActivity(intent);
 //          ((Activity)holder.orderId.getContext()).finish();
 
       }
+    }
+});
+
+holder.card.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(holder.orderId.getContext(),walktry_order_details_show_self.class);
+        String id=getRef(position).getKey();
+//        intent.putExtra("orderid",model.getID());
+        intent.putExtra("id",id);
+//        intent.putExtra("shopname",model.getShopname());
+//        intent.putExtra("addrss",model.getAddress());
+//        intent.putExtra("ordertime",model.getTime());
+//
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        holder.orderId.getContext().startActivity(intent);
+        ((Activity)holder.orderId.getContext()).finish();
+
     }
 });
 
@@ -112,6 +137,10 @@ holder.openmap.setOnClickListener(new View.OnClickListener() {
     {
         private ImageView imgproduct;
         private Button cancel;
+        private String shpoid;
+        private String Saddress,Daddress;
+        private LinearLayout card;
+
         private LinearLayout getdiretion;
         private TextView shopname,adddress,openmap,orederTime,orderId;
       
@@ -126,6 +155,7 @@ holder.openmap.setOnClickListener(new View.OnClickListener() {
             openmap=itemView.findViewById(R.id.openmap);
             orederTime=itemView.findViewById(R.id.orederTime);
             orderId=itemView.findViewById(R.id.orderId);
+            card=itemView.findViewById(R.id.card);
 
         }
     }

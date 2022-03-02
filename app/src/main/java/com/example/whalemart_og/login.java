@@ -1,3 +1,4 @@
+
 package com.example.whalemart_og;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ public class login extends AppCompatActivity {
     private Button singin;
     private EditText emailadd;
     private EditText getpassword;
-    private TextView info;
+//    private TextView info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class login extends AppCompatActivity {
         singin=findViewById(R.id.singin);
         emailadd=findViewById(R.id.Emailadd);
         getpassword=findViewById(R.id.password);
-        info=findViewById(R.id.textView2);
+//        info=findViewById(R.id.textView2);
         pb=findViewById(R.id.progressBar);
         singin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,16 +55,17 @@ public class login extends AppCompatActivity {
                 password=getpassword.getText().toString();
                 if(email.isEmpty())
                 {
-
-                    info.setText("Please Enter Email");
-                    info.setVisibility(View.VISIBLE);
-                    pb.setVisibility(View.INVISIBLE);
+                    Toast.makeText(login.this, "Enter email", Toast.LENGTH_SHORT).show();
+//                    info.setText("Please Enter Email");
+//                    info.setVisibility(View.VISIBLE);
+//                    pb.setVisibility(View.INVISIBLE);
                 }
                 else if(password.isEmpty())
                 {
-                    info.setText("Please Enter password");
-                    info.setVisibility(View.VISIBLE);
-                    pb.setVisibility(View.INVISIBLE);
+                    Toast.makeText(login.this, "Enter password", Toast.LENGTH_SHORT).show();
+//                    info.setText("Please Enter password");
+//                    info.setVisibility(View.VISIBLE);
+//                    pb.setVisibility(View.INVISIBLE);
                 }
                 else {
                     signin();
@@ -93,8 +95,8 @@ public class login extends AppCompatActivity {
                             e=task.getException().getMessage();
 
                             Toast.makeText(login.this, "Error..."+e, Toast.LENGTH_SHORT).show();
-                            info.setVisibility(View.VISIBLE);
-                            pb.setVisibility(View.INVISIBLE);
+
+//                            pb.setVisibility(View.INVISIBLE);
                         }
 
 

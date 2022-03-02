@@ -72,6 +72,26 @@ AdapterShowOrderToSeller adapterShowOrderToSeller;
                 startActivity(intent);
             }
         });
+        //////////////////////////////////////////////////////////////
+        FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (snapshot.hasChild("yourorders")) {
+                            erroimage.setVisibility(View.GONE);
+                            // it exists!
+                        }
+                        else{
+                            erroimage.setVisibility(View.VISIBLE);
+                            // does not exist
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 //        erroimage=view.findViewById(R.id.erroimage);
 //        FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getUid())
 //                .addListenerForSingleValueEvent(new ValueEventListener() {

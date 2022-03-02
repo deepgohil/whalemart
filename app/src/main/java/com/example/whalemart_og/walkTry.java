@@ -67,6 +67,7 @@ public class walkTry extends AppCompatActivity {
     String thisDate;
     String flag;
     EditText myadd;
+    String shopid;
     ///////////////new
 
     // bunch of location related apis
@@ -99,6 +100,7 @@ public class walkTry extends AppCompatActivity {
        size = getIntent().getStringExtra("size");
        price = getIntent().getStringExtra("price");
        desc= getIntent().getStringExtra("desc");
+//       shop_id= getIntent().getStringExtra("shop_id");
 
         Picasso.get().load(urlproduct).into(imgproduct);
         ////////////////////////////////////////////////////////////////
@@ -126,7 +128,7 @@ public class walkTry extends AppCompatActivity {
                 });
 
 
-        ////////////////shop ID.
+        //////////////shop ID.
         FirebaseDatabase.getInstance().getReference().child("product").child(id)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -188,9 +190,58 @@ public class walkTry extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getlocationdetails();
 
-                processOrder();
 
+            }
+        });
+
+    }
+
+    private void getlocationdetails() {
+        if (ActivityCompat.checkSelfPermission(walkTry.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            setlocationdetails();
+        } else
+            ActivityCompat.requestPermissions(walkTry.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 10);
+
+    }
+
+    private void setlocationdetails() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+            return;
+        }
+        mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                Location location=task.getResult();
+                if(location!=null)
+                {
+                    Geocoder geocoder=new Geocoder(walkTry.this,Locale.getDefault());
+                    try {
+                        List<Address> addressList=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                        double latitude= (double) addressList.get(0).getLatitude();
+                        double longitude= (double) addressList.get(0).getLongitude();
+                        Address=addressList.get(0).getAddressLine(0);
+                        processOrder();
+
+
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    Toast.makeText(walkTry.this, "ERROR ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -268,12 +319,28 @@ public class walkTry extends AppCompatActivity {
 
 
             HashMap<String, Object> map = new HashMap<>();
-            map.put("shopname", shopname.getText().toString());
-            map.put("daddress", description.getText().toString());
-            map.put("time", ordetime);
-            map.put("ID", ts);
-            map.put("productId", id);
-            map.put("imageurl", urlproduct);
+            map.put("dAddress", description.getText().toString());
+            map.put("sAddress", Address);
+        map.put("productId",id);
+        map.put("title",title);
+        map.put("Buyerid",FirebaseAuth.getInstance().getUid());
+        map.put("time",ordetime.toString());
+        map.put("orderId",ts);
+        map.put("imageurl",urlproduct);
+        map.put("username",name);
+        map.put("size",size);
+        map.put("price",price);
+        map.put("desc",desc);
+        map.put("date",thisDate);
+//        map.put("Address","walk try");
+
+
+        ///////////////////important
+//
+//        map.put("phonenumber",phone);
+//        map.put("paymentmode","offline");
+//        map.put("ordertype","walk try");
+
 
             FirebaseDatabase.getInstance().getReference()
                     .child("User")
@@ -284,10 +351,10 @@ public class walkTry extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-//                            Toast.makeText(walkTry.this, "Sucess", Toast.LENGTH_SHORT).show();
-//                            Intent startmain = new Intent(walkTry.this, MainActivity.class);
-//                            startActivity(startmain);
-                            savetoshop(ts);
+                            Toast.makeText(walkTry.this, "Sucess", Toast.LENGTH_SHORT).show();
+                            Intent startmain = new Intent(walkTry.this, MainActivity.class);
+                            startActivity(startmain);
+//                            savetoshop(ts);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -313,49 +380,50 @@ public class walkTry extends AppCompatActivity {
             startActivity(new Intent(walkTry.this, MainActivity.class));
             finish();
         }
-    private void savetoshop(String ts) {
-        HashMap<String,Object> map = new HashMap<>();
+//    private void savetoshop(String ts) {
+//        HashMap<String,Object> map = new HashMap<>();
+////        map.put("productId",id);
 //        map.put("productId",id);
-        map.put("productId",id);
-        map.put("title",title);
-        map.put("Buyerid",FirebaseAuth.getInstance().getUid());
-        map.put("time",ordetime.toString());
-        map.put("orderId",ts);
-        map.put("imageurl",urlproduct);
-        map.put("username",name);
-        map.put("size",size);
-        map.put("price",price);
-        map.put("desc",desc);
-        map.put("date",thisDate);
-        map.put("Address","walk try");
-
-        ///////////////////important
-
-        map.put("phonenumber",phone);
-        map.put("paymentmode","offline");
-        map.put("ordertype","walk try");
-        FirebaseDatabase.getInstance().getReference()
-                .child("User")
-                .child(shop_id)
-                .child("yourorders")
-                .child(ts)
-                .setValue(map)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-
-                            Toast.makeText(walkTry.this, "Sucess", Toast.LENGTH_SHORT).show();
-                            Intent startmain = new Intent(walkTry.this, MainActivity.class);
-                            startActivity(startmain);
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(walkTry.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
+//        map.put("title",title);
+//        map.put("Buyerid",FirebaseAuth.getInstance().getUid());
+//        map.put("time",ordetime.toString());
+//        map.put("orderId",ts);
+//        map.put("imageurl",urlproduct);
+//        map.put("username",name);
+//        map.put("size",size);
+//        map.put("price",price);
+//        map.put("desc",desc);
+//        map.put("date",thisDate);
+//        map.put("Address","walk try");
+//        map.put("useraddress", Address);
+//
+//        ///////////////////important
+//
+//        map.put("phonenumber",phone);
+//        map.put("paymentmode","offline");
+//        map.put("ordertype","walk try");
+//        FirebaseDatabase.getInstance().getReference()
+//                .child("User")
+//                .child(shop_id)
+//                .child("yourorders")
+//                .child(ts)
+//                .setValue(map)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//
+//                            Toast.makeText(walkTry.this, "Sucess", Toast.LENGTH_SHORT).show();
+//                            Intent startmain = new Intent(walkTry.this, MainActivity.class);
+//                            startActivity(startmain);
+//
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(walkTry.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
     }
 

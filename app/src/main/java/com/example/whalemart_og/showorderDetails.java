@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.whalemart_og.activity.MainActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,9 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 public class showorderDetails extends AppCompatActivity {
 String id;
-String name_,phonenumber_,adddress_,title_,size_,price_,time_,paymentmode_,ordertype_,orderID_,url;
+String name_,phonenumber_,adddress_,title_,size_,price_,time_,paymentmode_,ordertype_,orderID_,url,buyid_;
 TextView name,phonenumber,adddress,title,size,price,time,paymentmode,ordertype,orderID;
 ImageView imgproduct;
 Button deliverd;
@@ -46,18 +51,7 @@ Button deliverd;
         deliverd=findViewById(R.id.deliverd);
 
 
-        deliverd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference().child("User")
-                        .child(FirebaseAuth.getInstance().getUid())
-                        .child("yourorders")
-                        .child(id)
-                        .removeValue();
-                startActivity(new Intent(showorderDetails.this, MainActivity.class));
-                finish();
-            }
-        });
+
 
         FirebaseDatabase.getInstance().getReference().child("User")
                 .child(FirebaseAuth.getInstance().getUid())
@@ -79,6 +73,7 @@ Button deliverd;
                         ordertype_=dataSnapshot.child("ordertype").getValue(String.class);
                         orderID_=dataSnapshot.child("orderId").getValue(String.class);
                         url=dataSnapshot.child("imageurl").getValue(String.class);
+                        buyid_=dataSnapshot.child("Buyerid").getValue(String.class);
 
 
 
@@ -110,5 +105,63 @@ Button deliverd;
 //        {
 //            adddress.setVisibility(View.GONE);
 //        }
+
+        deliverd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase.getInstance().getReference().child("User")
+                        .child(FirebaseAuth.getInstance().getUid())
+                        .child("yourorders")
+                        .child(id)
+                        .removeValue();
+
+                FirebaseDatabase.getInstance().getReference().child("User")
+                        .child(buyid_)
+                        .child(ordertype_)
+                        .child(id)
+                        .removeValue();
+
+
+
+                savetohistory();
+
+            }
+        });
+    }
+
+    private void savetohistory() {
+        HashMap<String,Object> map = new HashMap<>();
+        map.put( "name", name_);
+        map.put("phonenumber",phonenumber_);
+        map.put("address",adddress_);
+        map.put("title",title_);
+        map.put("size",size_);
+        map.put("price",price_);
+        map.put("token",ordertype_);
+        map.put("imagg",url);
+
+
+
+
+
+        FirebaseDatabase.getInstance().getReference()
+                .child("history")
+                .child(FirebaseAuth.getInstance().getUid())
+                .push()
+                .setValue(map)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        startActivity(new Intent(showorderDetails.this, MainActivity.class));
+                        finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+
+                    }
+                });
     }
 }

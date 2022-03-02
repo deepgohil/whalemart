@@ -34,17 +34,29 @@ public class ordertype extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordertype);
 
-        title=getIntent().getStringExtra("title");
-        id=getIntent().getStringExtra("id");
-        price=getIntent().getStringExtra("price");
-        url=getIntent().getStringExtra("url1");
-        size=getIntent().getStringExtra("size");
-        desc=getIntent().getStringExtra("desc");
-        productcount=getIntent().getStringExtra("productcount");
-        catagory=getIntent().getStringExtra("catogary");
-        shop_id=getIntent().getStringExtra("shopid");
+        Bundle bundle=getIntent().getExtras();
+if(bundle==null) {
+    title ="error";
+    id = "error";
+   price = "error";
+   url ="error";
+    size ="error";
+ desc ="error";
+  productcount ="error";
+  catagory ="error";
+  shop_id ="error";
 
 
+}
+        title = bundle.getString("title");
+        id = bundle.getString("id");
+        price = bundle.getString("price");
+        url = bundle.getString("url1");
+        size = bundle.getString("size");
+        desc = bundle.getString("desc");
+        productcount = bundle.getString("productcount");
+        catagory = bundle.getString("catogary");
+        shop_id = bundle.getString("shopid");
 
 
         FirebaseDatabase.getInstance().getReference().child("User").child(shop_id)
@@ -196,6 +208,7 @@ public class ordertype extends AppCompatActivity {
                 starthome.putExtra("size",size);
                 starthome.putExtra("price",price);
                 starthome.putExtra("desc",desc);
+                starthome.putExtra("shopid",shop_id);
 
                 startActivity(starthome);
 
@@ -215,6 +228,7 @@ public class ordertype extends AppCompatActivity {
                 starthome.putExtra("id",id);
                 starthome.putExtra("url1",url);
                 starthome.putExtra("catagary",catagory);
+                starthome.putExtra("shopid",shop_id);
                 startActivity(starthome);
             }
         });

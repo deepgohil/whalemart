@@ -80,6 +80,19 @@ public class MainActivity extends AppCompatActivity {
             }
         },5000);
 
+        Handler handler1=new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                    check="error";
+                    UID="error";
+
+            }
+        },6000);
+
+
+
 
 //        locationManager= (LocationManager) getSystemService(LOCATION_SERVICE)
 

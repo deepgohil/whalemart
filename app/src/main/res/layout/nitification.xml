@@ -1,46 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:layout_height="120dp">
+    android:layout_height="110dp">
     <androidx.cardview.widget.CardView
         android:layout_margin="15dp"
         app:cardCornerRadius="10dp"
         android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<LinearLayout
 
-    android:layout_gravity="center_vertical"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
->
-        <TextView
-            android:fontFamily="@font/gothambold"
-            android:textColor="@color/black"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="20dp"
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:textSize="24dp"
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="welcome to html"
-            android:layout_marginLeft="20dp" />
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_gravity="center_vertical"
-        android:textSize="15dp"
-        android:fontFamily="@font/gothambold"
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="description of notification"
-        android:layout_marginLeft="20dp" />
-</LinearLayout>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/gothambold"
+                android:text="welcome to html"
+                android:textColor="@color/black"
+                android:textSize="24dp" />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/gothambold"
+                    android:text="description of notification"
+                    android:textSize="15dp" />
+
+                <TextView
+
+                    android:id="@+id/datetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/gothambold"
+                    android:text="7 feb 2003"
+                    android:textSize="15dp" />
+            </LinearLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

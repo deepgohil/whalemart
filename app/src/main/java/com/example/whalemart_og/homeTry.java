@@ -76,6 +76,10 @@ public class homeTry extends AppCompatActivity {
         size=getIntent().getStringExtra("size");
         desc=getIntent().getStringExtra("desc");
         cat=getIntent().getStringExtra("catagary");
+        shop_id=getIntent().getStringExtra("shop_id");
+
+
+
         radioGroup=findViewById(R.id.radioGroup);
 
         productimage=findViewById(R.id.productimage);
@@ -241,6 +245,7 @@ totalPrice.setText(price+" ₹");
         map.put("size",size);
         map.put("price",totalPrice.getText().toString());
         map.put("desc",desc);
+        map.put("shopid",shop_id);
 
 
 
@@ -291,7 +296,7 @@ totalPrice.setText(price+" ₹");
 
         map.put("phonenumber",mobilenumber.getText().toString());
         map.put("paymentmode","offline");
-        map.put("ordertype","Home try");
+        map.put("ordertype","homeTry");
         FirebaseDatabase.getInstance().getReference()
                 .child("User")
                 .child(shop_id)
