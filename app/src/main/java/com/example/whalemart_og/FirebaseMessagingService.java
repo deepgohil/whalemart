@@ -1,30 +1,22 @@
 package com.example.whalemart_og;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.IBinder;
 import android.os.Vibrator;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 
-import com.example.whalemart_og.activity.MainActivity;
 import com.google.firebase.messaging.RemoteMessage;
 
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
@@ -103,7 +95,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
 // notificationId is a unique int for each notification that you must define
             mNotificationManager.notify(100, builder.build());
-            startcall(body);
+//            startcall(body);
 
         }
         else
@@ -176,14 +168,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     }
 
-    private void startcall(String body) {
-        Intent intent = new Intent(this, Videocall_incoming.class);
-        intent.putExtra("UID",body);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-//        ((Activity)getBaseContext()).finish();
+//    private void startcall(String body) {
+//        Intent intent = new Intent(this, Videocall_incoming.class);
+//        intent.putExtra("UID",body);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
+////        ((Activity)getBaseContext()).finish();
     }
 
-}
+
 
 

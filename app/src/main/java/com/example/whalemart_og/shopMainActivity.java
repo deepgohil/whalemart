@@ -10,8 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.whalemart_og.activity.MainActivity;
-import com.example.whalemart_og.fragment.notification;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class shopMainActivity extends AppCompatActivity {

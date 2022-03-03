@@ -161,21 +161,22 @@ if(bundle==null) {
                 videocall.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent starthome = new Intent(ordertype.this, Videocall_outgoing.class);
-                        UID=FirebaseAuth.getInstance().getUid();
-                        Toast.makeText(ordertype.this,"TOKEN"+token, Toast.LENGTH_SHORT).show();
-                        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Video call",UID,getApplicationContext(),ordertype.this);
-                        notificationsSender.SendNotifications();
-                        starthome.putExtra("title",title);
-                        starthome.putExtra("price",price);
-                        starthome.putExtra("size",size);
-                        starthome.putExtra("desc",desc);
-                        starthome.putExtra("id",id);
-                        starthome.putExtra("url1",url);
-                        starthome.putExtra("catagary",catagory);
-                        starthome.putExtra("token",token);
-                        starthome.putExtra("shop_id",shop_id);
-                        startActivity(starthome);
+                        Toast.makeText(ordertype.this, "Comming soon", Toast.LENGTH_SHORT).show();
+//                        Intent starthome = new Intent(ordertype.this, Videocall_outgoing.class);
+//                        UID=FirebaseAuth.getInstance().getUid();
+//                        Toast.makeText(ordertype.this,"TOKEN"+token, Toast.LENGTH_SHORT).show();
+//                        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Video call",UID,getApplicationContext(),ordertype.this);
+//                        notificationsSender.SendNotifications();
+//                        starthome.putExtra("title",title);
+//                        starthome.putExtra("price",price);
+//                        starthome.putExtra("size",size);
+//                        starthome.putExtra("desc",desc);
+//                        starthome.putExtra("id",id);
+//                        starthome.putExtra("url1",url);
+//                        starthome.putExtra("catagary",catagory);
+//                        starthome.putExtra("token",token);
+//                        starthome.putExtra("shop_id",shop_id);
+//                        startActivity(starthome);
                     }
                 });
 

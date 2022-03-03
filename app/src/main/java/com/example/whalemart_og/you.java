@@ -15,9 +15,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.whalemart_og.activity.MainActivity;
-import com.example.whalemart_og.R;
-import com.example.whalemart_og.sendnoti;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

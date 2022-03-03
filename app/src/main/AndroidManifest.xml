@@ -23,8 +23,6 @@
         <activity android:name=".hometry_order_details_show_self" />
         <activity android:name=".walktry_order_details_show_self" />
         <activity android:name=".callcheck" />
-        <activity android:name=".Videocall_outgoing" />
-        <activity android:name=".Videocall_incoming" />
         <activity android:name=".showorderDetails" />
         <activity android:name=".owner_can_edit_data_here" />
         <activity android:name=".showclothes" />
@@ -43,8 +41,8 @@
         <activity android:name=".sendnoti" />
         <activity android:name=".login" />
         <activity android:name=".createacount" />
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.splashscreen">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

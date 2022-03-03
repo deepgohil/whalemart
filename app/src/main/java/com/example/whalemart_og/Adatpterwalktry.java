@@ -15,14 +15,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.whalemart_og.activity.MainActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
-import java.security.acl.AclNotFoundException;
 
 public class Adatpterwalktry extends FirebaseRecyclerAdapter<Modelwalktry, Adatpterwalktry.HolderProductSeller> {
 

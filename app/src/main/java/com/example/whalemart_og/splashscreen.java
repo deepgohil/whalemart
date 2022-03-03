@@ -1,4 +1,4 @@
-package com.example.whalemart_og.activity;
+package com.example.whalemart_og;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
-
-import com.example.whalemart_og.R;
 
 public class splashscreen extends AppCompatActivity {
     Handler handler;
@@ -24,6 +22,7 @@ public class splashscreen extends AppCompatActivity {
 
                 Intent startmain= new Intent(splashscreen.this, MainActivity.class);
                 startActivity(startmain);
+
                 finish();
             }
         },1000);
